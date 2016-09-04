@@ -1,0 +1,65 @@
+*.总结String char 和 final与static 
+
+事先声明:"+"在java里面,如果用+作为连接符,在连接两个对象时,如果不是字符串就做加法
+		如果有字符串就是拼接
+		
+		java内存
+		在常量池里面的相同值只有一份,在堆内存里面分配的常量会复制到常量池
+		String a = new String("aaaa");
+			会现在常量池里面找有没有"aaaa",如果有就不创建,没有就创建
+			然后再堆里面创建一个,
+1.char  a ='a';   声明char 必须用''单引号,且只能有一个字符,不管是中文还是英文，只要是char就占两个字节
+	System.out.println('a'+'a');//194  不是字符串就做加法
+
+2.String "+"如果连接的是两个字面值,得到的值会放在常量池中,如果有连接变量,则会在堆内存里面存放
+	String a = "a1";
+	String b = "a"+1;//b指向常量池
+	System.out.println(a==b)//true
+	、、、、、、、、、、、、、、、、、、、、、、
+	String a ="ab";
+	String bb ="b";
+	String b = "a"+bb;//b指向的是堆内存里面new出来的一个新对象
+	System.out.println(a==b)//true
+	，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，
+	
+	String a = "ab";
+	final String bb = "b";
+	String b = "a" + bb;//bb被final修饰,是在编译期就能识别的常量,相当于"a"+"b"
+	System.out.println(a == b);//true
+	,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+	String a = "ab";
+	final String bb = getBB();
+	String b = "a" + bb;//bb也被final修饰,但是在编译器不能直接识别出来,所以还是相当于"a"+bb
+	System.out.println(a == b);//false
+
+	private static String getBB() {
+		return "b";
+	}
+	，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，，
+	private static String a = "ab";
+	public static void main(String[] args) {
+		String s1 = "a";
+		String s2 = "b";
+		String s = s1 + s2;
+		System.out.println(s == a);//false
+		System.out.println(s.intern() == a);//true  s.intern()会在常量池里面寻找是否拥有该字符串的值,
+		有就返回,没有就添加进去,返回对此值得引用
+	}
+	
+	
+3.final变量和普通变量的区别
+	final变量会在编译时当成常量,而普通变量需要在运行期才能确定，
+	不过要注意，只有在编译期间能确切知道final变量值的情况下，编译器才会进行这样的优化
+
+4.final和static的区别
+	final修饰成员变量是指明变量值不能改变,一个对象拥有一个该变量,但是两个对象的值可能不同
+	static指明整个类只有一份该变量，不管有多少对象，其值不变
+	
+	
+	
+	
+	
+	
+	
+	
+	
