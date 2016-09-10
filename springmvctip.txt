@@ -1,0 +1,38 @@
+1.RequestMapping
+2.可以使用HttpServletRequest获取请求
+3.使用实体接收页面参数
+
+sessionAttributes可以将属性放入session中
+ModeAndView 和Map可以存入参数作为返回
+
+ModelAttribute修改的时候
+可以通过Id将数据库的数据查询出来   
+页面修改了的数据就覆盖到原来的数据，未修改的就不变
+使用mybatis这个不需要,update时可以不修改未修改的属性
+
+
+视图解析器
+
+不管方法返回的是String Model 或者 ModelAndView
+spring mvc 都会把他转化为一个ModelAndView
+ViewResolver接口
+InternalResourceView用来解析--视图
+
+
+视图解析器得到view，最终视图可以是jsp也可以是其他的视图
+
+<bean  
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+   <property name="viewClass"  
+		value="org.springframework.web.servlet.view.JstlView" /> 
+	<property name="prefix" value="/WEB-INF/views" />  
+	<property name="suffix" value=".jsp" />  
+</bean>
+
+
+jstlView --和InternalResourceView同级
+用了一个国际化来举例
+
+mvc:view-controller可以直接转发,不经过controller需要配置  mvc:annotation-driven
+
+
