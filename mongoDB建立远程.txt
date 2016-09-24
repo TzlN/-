@@ -1,0 +1,1 @@
+db.createUser({user:"adminFF",pwd:"FFunReborn",roles:[{role:'userAdmin',db:'FFunReborn'}]})
